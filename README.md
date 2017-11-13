@@ -11,8 +11,8 @@ Los siguientes programas se necesitan instalar
 ```
 Python 2.7 NIC
 ```
-Además, las librerias de Python
-
+Además, las librerías de Python.
+Estas librerías pueden ser instaladas via pip.
 ```
 Numpy Scipy Matplotlib Pygame Scikit-learn Pylsl winsound
 ```
@@ -59,9 +59,9 @@ python Realimentacion_voluntaria.py
 
 ## Authors
 
-* **Dayán Méndez** - [PurpleBooth](https://github.com/djmv)
+* **Dayán Méndez** - [Perfil](https://github.com/djmv)
 
-* **Jorge Silva** - [PurpleBooth](https://github.com/JorgeluissilvaC)
+* **Jorge Silva** - [Perfil](https://github.com/JorgeluissilvaC)
 
 ## Acknowledgments
 
