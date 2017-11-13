@@ -1,7 +1,7 @@
 # BCI-Final_Project
 Aquí se implementa una interfaz cerebro-computadora basada en ritmos cerebrales alfa para el control de una animación 
 
-## Getting Started
+## Inicialmente
 
 Este proyecto se desarrolló con la finalidad, de que puede replicarse el proyecto en cualquier parte.
 
@@ -57,13 +57,13 @@ Realimentación voluntaria:
 python Realimentacion_voluntaria.py
 ```
 
-## Authors
+## Autores
 
 * **Dayán Méndez** - [Perfil](https://github.com/djmv)
 
 * **Jorge Silva** - [Perfil](https://github.com/JorgeluissilvaC)
 
-## Acknowledgments
+## Agradecimientos
 
 * BSPAI-Lab
 * A todas las personas que colaboraron en nuestra investigación y etapa de aprendizaje.
