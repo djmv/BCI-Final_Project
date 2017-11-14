@@ -394,7 +394,7 @@ class game(object):
 
 if __name__ == '__main__':
     # call with width of window and fps
-    #S_ID = raw_input("[!] Digite el identificador del sujeto: ")
-    S_ID="dayan2710-1" # Nombre de la prueba de entrenamiento
+    S_ID = raw_input("[!] Digite el identificador del sujeto: ")  # Nombre de la prueba de entrenamiento
+    #S_ID="dayan2710-1" # Nombre de la prueba de entrenamiento
     game(S_ID).run()
     

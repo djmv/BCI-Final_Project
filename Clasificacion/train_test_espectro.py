@@ -17,6 +17,8 @@ from sklearn import preprocessing
 from sklearn import svm
 from sklearn.metrics import confusion_matrix
 from sklearn.decomposition import PCA
+from sklearn.metrics import accuracy_score
+
 
 def get_data_db(id_s):
     """importa los datos del dataset(.mat).
@@ -29,6 +31,9 @@ def get_data_db(id_s):
         if (len(conc)>len(conc[0][0])):
               conc = np.transpose(conc, (2, 1, 0))
               rel = np.transpose(rel, (2, 1, 0))
+        if (len(conc)==8):
+              conc = np.transpose(conc, (2, 0, 1))
+              rel = np.transpose(rel, (2, 0, 1))
         data_time = np.zeros((len(conc)*2, len(conc[0]), len(conc[0][0])))
         data_time[0:len(conc)] = conc
         data_time[len(conc)::] = rel
@@ -125,7 +130,7 @@ def car(data):
 """Codigo principal - Entrenamiento espectrograma y prueba de predicción """
 "Main Code"
 plt.close('all')
-S_ID = "S01" # Nombre del archivo del sujeto
+S_ID = raw_input("[!] Nombre archivo Entrenamiento: ") # Nombre del archivo del sujeto
 DATA = get_data_db(S_ID) # Obtiene los datos del .mat
 Datar = car(DATA) # Referencia la señal 
 [D_DC, m_v] = remove_dc(Datar) # Datos sin DC
@@ -159,7 +164,7 @@ clf = svm.SVC(kernel='linear', C=1).fit(Feats_a, LABELS)
 
 """Procesamiento datos de realimentación"""
 
-S_ID2 = "S01_R" # Nombre archivo realimentación
+S_ID2 = raw_input("[!] Nombre archivo Realimentacion: ")  # Nombre archivo realimentación
 DATA = get_data_db(S_ID2)
 Datar = car(DATA)
 [D_DC, m_v] = remove_dc(Datar) # Datos sin DC
@@ -182,6 +187,8 @@ y_pred = clf.predict(test_feats) # Predicción sobre datos de realimentación
 
 y_true = LABELS # Etiquetas de la acción realizada en las pruebas de realimentación
 precision = accuracy_score(y_true, y_pred) # Precisión del clasificador.
+print "Precision \n"
 print precision 
-conf = confusion_matrix(LABELS, y_pred) # Matriz de confusión
-print conf # Matriz de confusión
+conf = confusion_matrix(LABELS, y_pred)
+print "Matriz de confusion \n"
+print conf

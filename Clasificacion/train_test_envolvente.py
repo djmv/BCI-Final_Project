@@ -35,6 +35,10 @@ def get_data_db(id_s):
         if (len(conc)>len(conc[0][0])):
               conc = np.transpose(conc, (2, 1, 0))
               rel = np.transpose(rel, (2, 1, 0))
+        if (len(conc)==8):
+              conc = np.transpose(conc, (2, 0, 1))
+              rel = np.transpose(rel, (2, 0, 1))
+
         data_time = np.zeros((len(conc)*2, len(conc[0]), len(conc[0][0])))
         data_time[0:len(conc)] = conc
         data_time[len(conc)::] = rel
@@ -145,7 +149,7 @@ def split_overlap(array,size,overlap):
 
 "Main Code"
 plt.close('all')
-S_ID = "S01" # Nombre del archivo del sujeto
+S_ID = raw_input("[!] Nombre archivo Entrenamiento: ") # Nombre del archivo del sujeto
 DATA = get_data_db(S_ID) # Obtiene los datos del .mat
 Datar = car(DATA) # Referencia la señal 
 [D_DC, m_v] = remove_dc(Datar) # Datos sin DC
@@ -167,7 +171,7 @@ hilb2 = sighilt[len(Y)/2::,:,500:-500]
 sighilt1 = np.mean(hilb1, axis=0) #Envolvente promedio clase 1
 sighilt2 = np.mean(hilb2, axis=0) #Envolvente promedio clase 2
 
-sighiltm1_1 = np.mean(sighilt[:,:,500:-500], axis=2) # Valor promedio por electrodo 
+sighiltm1_1 = np.mean(sighilt[:,:,:], axis=2) # Valor promedio por electrodo 
 sighiltm1 = sighiltm1_1 #Solo alfa
 #%%
 ff = sighiltm1.shape # Tamaño del array
@@ -191,7 +195,7 @@ LABELS[len(LABELS)/2::] = 2
 clf = svm.SVC(kernel='linear', C=1).fit(FEATS,LABELS)
 
 
-S_ID2 = "S01_R" # Nombre del archivo del sujeto
+S_ID2 = raw_input("[!] Nombre archivo Realimentacion: ") # Nombre del archivo del sujeto
 DATA = get_data_db(S_ID2) # Obtiene los datos del .mat
 Datar = car(DATA) # Referencia la señal 
 [D_DC, m_v] = remove_dc(Datar) # Datos sin DC
@@ -210,13 +214,15 @@ sighilt2 = np.mean(hilb2, axis=0) #Envolvente promedio clase 2
 LABELS = np.zeros((Y.shape[0]))
 LABELS[0:len(LABELS)/2] = 1
 LABELS[len(LABELS)/2::] = 2
-sighiltm1_1 = np.mean(sighilt[:,:,500:-500], axis=2) # Valor promedio por electrodo 
+sighiltm1_1 = np.mean(sighilt[:,:,:], axis=2) # Valor promedio por electrodo 
 test_feats = sighiltm1_1 #Caracteristicas de prueba
 
 y_pred = clf.predict(test_feats)
 y_true = LABELS
 sc = accuracy_score(y_true, y_pred)
+print "Precision \n"
 print sc
 conf = confusion_matrix(LABELS, y_pred)
+print "Matriz de confusion \n"
 print conf
 

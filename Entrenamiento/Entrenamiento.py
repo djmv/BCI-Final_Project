@@ -34,8 +34,9 @@ class game(object):
         self.dimensions = (self.width, self.height)
         #self.screen = pygame.display.set_mode(self.dimensions, pygame.DOUBLEBUF)
         self.screen = pygame.display.set_mode(self.dimensions, pygame.FULLSCREEN)
-        self.imagenR= pygame.image.load("R1.png").convert()
-        self.imagenL= pygame.image.load("R2.png").convert()
+        if (self.tipo == 2):
+            self.imagenR= pygame.image.load("R1.png").convert()
+            self.imagenL= pygame.image.load("R2.png").convert()
         self.background = pygame.Surface(self.screen.get_size()).convert()
         self.screen.fill((255,255,255))#Fondo blanco
         self.clock = pygame.time.Clock()
